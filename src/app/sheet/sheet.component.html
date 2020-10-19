@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.css" />
+
+<!-- Toolbar -->
+
+
+<div class="content">
+  <div class="headers">
+    <h1>Real Estate Property Management</h1>
+  </div>
+  <div>
+    <div style="display: inline-block;  margin-right: 12px;color: rgb(211, 15, 15); " *ngIf="isShowDivIf">Please Select
+      the File </div>
+    <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+      accept=".xlsx">
+
+    <button type="button" class="button" (click)="onFileChange()" multiple="false">Submit</button>
+  </div>
+
+</div>
+<div class="errorflag" *ngIf="noerror == 1">
+  <span>Please add the Data in Excel Sheet</span>
+</div>
+<div class="errorflag" *ngIf="noerror > 3">
+  <span>Error Uploading data. Please try again</span>
+  <span>Allowed Column headers name and format</span>
+  <ul *ngFor="let item of loanErrrormap | keyvalue">
+    <li *ngIf="item.value.key > 1">{{item.value.value}}</li>
+  </ul>
+</div>
+<div *ngIf="3 >= noerror">
+  <div class="table-wrapper-scroll-y">
+    <div class="table-responsive">
+      <table class="table table-bordered import-table-view table-striped">
+        <thead>
+          <tr *ngFor="let row1 of testloan">
+            <th class="headers">{{row1.loanNo}}</th>
+            <th class="headers">{{row1.borrower}}</th>
+            <th class="headers">{{row1.dateOfBirth}}</th>
+            <th class="headers">{{row1.propAddress}}</th>
+            <th class="headers">{{row1.cost}}</th>
+            <th class="headers">{{row1.floodRisk}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of loanInfokey | paginate: { itemsPerPage: 20, currentPage: p }">
+            <td>
+              {{row.loanNo}}
+            </td>
+            <td>
+              {{row.borrower}}
+            </td>
+            <td>
+              {{row.dateOfBirth}}
+            </td>
+            <td>
+              {{row.propAddress}}
+            </td>
+            <td>
+              {{row.cost}}
+            </td>
+            <td>
+              {{row.floodRisk}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn-group" role="group" *ngIf="tableData != null">
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="content1">
+    <button type="button" class="button1" (click)="save()" multiple="false" *ngIf="tableData != null">Save Data</button>
+    <div [ngClass]="isSpecial ? 'success' : 'fail'">
+      <span *ngIf="datacheck && tableData != null">{{msg}}</span></div>
+  </div>
+</div>
