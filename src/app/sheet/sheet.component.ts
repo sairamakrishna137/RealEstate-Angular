@@ -19,7 +19,7 @@ export class SheetComponent implements OnInit {
   isShowDivIf: any
   noerror: number=0
   counter:number=0
-  testloan: LoanInfo[]=[]
+  headerloanInfo: LoanInfo[]=[]
   loanInfokey: LoanInfo[]=[]
   loanObjs=new ObjectMap(0,"");borrowerObj=new ObjectMap(1,"");dateOfBirthObj=new ObjectMap(0,"");propAddressObj=new ObjectMap(1,"");costObj=new ObjectMap(0,"");floodRiskObj=new ObjectMap(1,""); 
   loanErrrormap={loan:this.loanObjs,borrower:this.borrowerObj,dateOfBirth:this.dateOfBirthObj,propAddress:this.propAddressObj,cost:this.costObj,floodRisk:this.floodRiskObj}
@@ -54,8 +54,7 @@ export class SheetComponent implements OnInit {
       var workbook = XLSX.read(bstr, { type: "binary" });
       var first_sheet_name = workbook.SheetNames[0];
       var worksheet = workbook.Sheets[first_sheet_name];
-      // console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-
+     
       /* save data */
       this.tableData = <AOA>(XLSX.utils.sheet_to_json(worksheet, { header: 1 }));
       this.Validate();
@@ -159,7 +158,7 @@ export class SheetComponent implements OnInit {
           }
       }
       if(loanInfos.loanNo==0 || index==0){
-        this.testloan.push(loanInfos)
+        this.headerloanInfo.push(loanInfos)
       }else{
         this.loanInfokey.push(loanInfos)    
       }

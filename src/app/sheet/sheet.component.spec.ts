@@ -1,25 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { SheetServiceService } from '../sheet-service.service';
 import { SheetComponent } from './sheet.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SheetComponent', () => {
-  let component: SheetComponent;
-  let fixture: ComponentFixture<SheetComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SheetComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        SheetComponent
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      providers : [
+        SheetServiceService,HttpClient,HttpHandler
+      ]
+    }).compileComponents();
   });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SheetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('app-sheet Component Tested', () => {
+    const fixture = TestBed.createComponent(SheetComponent);
+   const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

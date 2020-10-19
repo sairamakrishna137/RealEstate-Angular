@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoanInfo } from './loan-info';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +14,7 @@ export class SheetServiceService {
     this.realEstateUrl = environment.springBootBase+environment.postLoans;
   }
 
-  public saveAll(user: LoanInfo[]) {
-    return this.http.post<LoanInfo>(this.realEstateUrl, user);
+  public saveAll(loan: LoanInfo[]) {
+    return this.http.post<LoanInfo>(this.realEstateUrl, loan);
   }
 }

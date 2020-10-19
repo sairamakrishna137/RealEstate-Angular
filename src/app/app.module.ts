@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SheetComponent } from './sheet/sheet.component';
 import { SheetServiceService } from './sheet-service.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import {NgxPaginationModule} from 'ngx-pagination';
- 
 
 @NgModule({
   declarations: [
@@ -14,9 +13,13 @@ import {NgxPaginationModule} from 'ngx-pagination';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,NgxPaginationModule
+    HttpClientModule,NgxPaginationModule,
   ],
+  exports:[SheetComponent],
   providers: [SheetServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }
